@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Greenify - Eco Coach</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Greenify</h1>
+  <div id="login-section">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <div id="form-section" style="display:none;">
+    <h2>Daily Habit Input</h2>
+    <label>Travel (km by car): <input type="number" id="travel"></label><br>
+    <label>Meat meals per day: <input type="number" id="meat"></label><br>
+    <button onclick="calculateCarbon()">Submit</button>
+    <p id="score"></p>
+    <p id="tip"></p>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+<!-- Inside index.html -->
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #e0f7ec;
+  padding: 20px;
+}
+input {
+  margin: 10px;
+  padding: 10px;
+}
+button {
+  padding: 10px 20px;
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+} <script src="script.js"></script>
+</body>const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT.firebaseio.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("form-section").style.display = "block";
+    })
+    .catch(err => alert(err.message));
+}
+
+function calculateCarbon() {
+  const travel = parseInt(document.getElementById("travel").value) || 0;
+  const meat = parseInt(document.getElementById("meat").value) || 0;
+
+  const score = travel * 0.21 + meat * 2.5;
+  document.getElementById("score").textContent = Your carbon score: ${score.toFixed(2)} kg CO2/day;
+
+  let tip = "Great! Keep going!";
+  if (score > 10) tip = "Try using public transport or eating less meat!";
+  else if (score > 5) tip = "You're doing okay. Small changes can help a lot!";
+document.getElementB
+yld("tip").textContent=tip;
+}
+
+
+
