@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Greenify Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #e8f5e9;
+      color: #2e7d32;
+      padding: 20px;
+      text-align: center;
+    }
+    .card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 32px;
+    }
+    .tip {
+      font-size: 20px;
+      margin: 15px 0;
+    }
+    .stats {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #388e3c;
+    }
+    .logout-btn {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #66bb6a;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Welcome to Greenify!</h1>
+    <p class="tip">Tip of the Day: Use a reusable water bottle to reduce plastic waste!</p>
+    <div class="stats">
+      You've saved <strong>12.4 kg</strong> of CO₂ this week! <br>
+      You’ve completed <strong>3 Eco-Missions</strong>.
+    </div>
+    <button class="logout-btn" onclick="logout()">Log Out</button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "A|zaSyCRdnt|ZP1un|Dz0ScXsmc613mqa9EcdZ8",
+      authDomain: "greenify-demo-2025.firebaseapp.com",
+      projectId: "greenify-demo-2025",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        window.location.href = "greenify-auth.html"; // Redirect if not logged in
+      }
+    });
+
+    function logout() {
+      signOut(auth).then(() => {
+        window.location.href = "greenify-auth.html";
+      });
+    }
+  </script>
+</body>
+</html>
+
+
+---
+
