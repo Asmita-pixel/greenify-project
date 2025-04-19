@@ -4,7 +4,22 @@
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
 
 <!-- Add Firebase products that you want to use -->
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script><script>
+  // Handle User Authentication
+  firebase.auth().onAuthStateChanged((user) => {
+    const welcomeMessageElement = document.getElementById('welcomeMessage');
+
+    if (user) {
+      // If user is logged in
+      const userName = user.email; // You can display the email or name
+      welcomeMessageElement.innerHTML = Welcome, ${userName}!;
+    } else {
+      // If no user is logged in
+      welcomeMessageElement.innerHTML = 'Please log in to continue.';
+    }
+  });
+</script>
+  
 
   
   
